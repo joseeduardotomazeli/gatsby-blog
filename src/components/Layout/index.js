@@ -3,17 +3,14 @@ import PropTypes from "prop-types"
 
 import * as S from "./styled"
 
-import Profile from "../Profile"
+import Sidebar from "../Sidebar"
 import GlobalStyles from "../../styles/global"
 
 const Layout = ({ children }) => {
   return (
     <S.LayoutWrapper>
-      <aside>
-        <Profile />
-      </aside>
+      <Sidebar />
       <S.LayoutMain>{children}</S.LayoutMain>
-
       <GlobalStyles />
     </S.LayoutWrapper>
   )
