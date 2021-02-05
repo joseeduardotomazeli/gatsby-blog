@@ -1,6 +1,7 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
-import Image from "gatsby-image"
+
+import * as S from "./styled"
 
 const Avatar = () => {
   const query = useStaticQuery(
@@ -19,7 +20,7 @@ const Avatar = () => {
 
   const { profilePhoto } = query
 
-  return <Image fixed={profilePhoto.childImageSharp.fixed} />
+  return <S.AvatarWrapper fixed={profilePhoto.childImageSharp.fixed} />
 }
 
 export default Avatar
