@@ -26,26 +26,52 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const postsQuery = await graphql(`
     query PostsQuery {
-      allMarkdownRemark {
+      allMarkdownRemark(sort: { fields: frontmatter___date, order: DESC }) {
         edges {
           node {
             fields {
               slug
             }
+            frontmatter {
+              background
+              category
+              date(locale: "pt-br", formatString: "DD [de] MMMM [de] YYYY")
+              title
+              description
+            }
+            timeToRead
           }
         }
       }
     }
   `)
 
-  postsQuery.data.allMarkdownRemark.edges.forEach(posts => {
-    const { slug } = posts.node.fields
+  const posts = postsQuery.data.allMarkdownRemark.edges
+
+  posts.forEach(post => {
+    const { slug } = post.node.fields
 
     createPage({
       path: slug,
       component: path.resolve("src", "templates", "post.js"),
       context: {
         slug,
+      },
+    })
+  })
+
+  const postsPerPage = 6
+  const numberOfPages = Math.ceil(posts.length / postsPerPage)
+
+  Array.from({ length: numberOfPages }).forEach((_, index) => {
+    createPage({
+      path: index === 0 ? `/` : `/page/${index + 1}`,
+      component: path.resolve("src", "templates", "list.js"),
+      context: {
+        limit: postsPerPage,
+        skip: index * postsPerPage,
+        numberOfPages,
+        currentPage: index + 1,
       },
     })
   })
