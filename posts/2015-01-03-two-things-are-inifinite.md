@@ -1,5 +1,5 @@
 ---
-background: "#7AAB13"
+background: "#7aab13"
 category: Misc
 date: 2015-01-03 05:54:23
 title: Two things are infinite

@@ -1,5 +1,5 @@
 ---
-background: "#7AAB13"
+background: "#7aab13"
 category: JS
 date: 2015-01-05 05:54:23
 title: Lorem lorem ipsum
